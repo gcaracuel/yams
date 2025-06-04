@@ -15,7 +15,12 @@ services:
     ports: # plex
       - 8096:8096 # plex
     restart: unless-stopped
-
+    labels:
+      - homepage.group=Media
+      - homepage.name=Jellyfin
+      - homepage.icon=jellyfin.png
+      - homepage.href=http://192.168.1.140:8096/
+      - homepage.description=Media server
   # qBitorrent is used to download torrents
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent
@@ -40,7 +45,7 @@ services:
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
-      - TZ=America/Montevideo
+      - TZ=Etc/UTC
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ${MEDIA_DIRECTORY}:/data
@@ -65,6 +70,12 @@ services:
     ports:
       - 8989:8989
     restart: unless-stopped
+    labels:
+      - homepage.group=Media
+      - homepage.name=Sonarr
+      - homepage.icon=sonarr.png
+      - homepage.href=http://192.168.1.140:8989/
+      - homepage.description=Sonarr
 
   # Radarr is used to query, add downloads to the download queue and index Movies
   # https://radarr.video/
