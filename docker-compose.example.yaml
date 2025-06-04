@@ -214,7 +214,7 @@ services:
       - 5055:5055
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - ${INSTALL_DIRECTORY}/config/jellyseerr:/config
+      - ${INSTALL_DIRECTORY}/config/jellyseerr:/app/config
     restart: unless-stopped
   homepage:
     image: ghcr.io/gethomepage/homepage:latest
