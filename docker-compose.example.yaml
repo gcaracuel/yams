@@ -202,3 +202,27 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
+
+  jellyseerr:
+    image: fallenbagel/jellyseerr:latest
+    container_name: jellyseerr
+    environment:
+      - LOG_LEVEL=warn
+      - TZ=Etc/UTC
+      - PORT=5055
+    ports:
+      - 5055:5055
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ${INSTALL_DIRECTORY}/config/jellyseerr:/config
+    restart: unless-stopped
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
+    ports:
+      - 3000:3000
+    volumes:
+      - ${INSTALL_DIRECTORY}/config/homepage:/app/config
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      HOMEPAGE_ALLOWED_HOSTS: "*"
